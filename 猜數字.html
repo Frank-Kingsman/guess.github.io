@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>猜數字遊戲</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: 2em;
+			margin-top: 50px;
+		}
+
+		input {
+			font-size: 1.2em;
+			padding: 10px;
+			margin-top: 30px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		button {
+			font-size: 1.2em;
+			padding: 10px 20px;
+			margin-top: 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #3e8e41;
+		}
+
+		img {
+			margin-top: 30px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<h1>猜數字遊戲</h1>
+	<p>請猜一個1-100之間的數字</p>
+	<input type="number" id="guess" min="1" max="100">
+	<button onclick="checkGuess()">確認</button>
+	<p id="hint"></p>
+	<img id="explosion" src="https://media.giphy.com/media/12s9KjZLkOvYzK/giphy.gif">
+	<script>
+		var secretNumber = Math.floor(Math.random() * 100) + 1;
+		var guesses = 0;
+
+		function checkGuess() {
+			var guess = document.getElementById("guess").value;
+			if (guess == secretNumber) {
+				document.getElementById("hint").innerHTML = "你猜對了！";
+				document.getElementById("explosion").style.display = "block";
+				document.getElementById("guess").disabled = true;
+			} else if (guess < secretNumber) {
+				document.getElementById("hint").innerHTML = "再大一點！";
+				guesses++;
+			} else {
+				document.getElementById("hint").innerHTML = "再小一點！";
+				guesses++;
+			}
+			document.getElementById("guess").value = "";
+			document.getElementById("guess").focus();
+		}
+	</script>
+</body>
+</html>
